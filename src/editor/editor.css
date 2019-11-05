@@ -1,0 +1,44 @@
+#editor {
+  background-color: #f1f0f0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+#editor div {
+  width: 600px;
+  flex-grow: 1;
+  background-color: #fff;
+  border: 1px solid #e4dede;
+}
+
+#editor div:focus {
+  outline: 3px solid #ffa500;
+}
+
+#control-panel {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.color-picker {
+  width: 23px;
+  height: 23px;
+  margin-right: 5px;
+}
+
+button {
+  vertical-align: super;
+  min-height: 25px;
+  min-width: 25px;
+  margin-right: 5px;
+}
+
+button.active {
+  background-color: #ffa500;
+}
