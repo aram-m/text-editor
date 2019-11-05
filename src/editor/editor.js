@@ -16,57 +16,57 @@ function getSelectedText() {
 
 const tools = {
   bold: {
-    name: 'bold',
     icon: 'B'
   },
   italic: {
-    name: 'italic',
     icon: 'I'
   },
   underline: {
-    name: 'underline',
     icon: 'U'
   },
   indent: {
-    name: 'indent',
     icon: 'indent'
   },
   outdent: {
-    name: 'outdent',
     icon: 'outdent'
   },
   removeFormat: {
-    name: 'removeFormat',
     icon: 'reset'
   }
 };
 
-function Editor(props) {
+function Editor() {
   const [selected, setSelected] = useState(null);
 
-  const handleKeyUp = () => {
-    console.log(getSelectedText());
+  const onHandleSelect = () => {
+    setSelected(getSelectedText());
   };
 
   const clickColor = color => {
     document.execCommand('foreColor', false, color);
-    setSelected({ selected: getSelectedText() });
+    setSelected(getSelectedText());
+  };
+
+  const changeWord = synonym => {
+    document.execCommand('insertText', false, synonym);
   };
 
   const clickTool = toolName => {
     document.execCommand(toolName);
-    setSelected({ selected: getSelectedText() });
+    setSelected(getSelectedText());
   };
 
   return (
     <>
-      <Toolbar clickTool={clickTool} clickColor={clickColor} tools={tools} />
+      <Toolbar
+        clickTool={clickTool}
+        clickColor={clickColor}
+        changeWord={changeWord}
+        tools={tools}
+        word={selected}
+      />
       <div id='editor'>
-        <div
-          contentEditable={true}
-          onMouseUp={handleKeyUp}
-          onKeyUp={handleKeyUp}
-        ></div>
+        <div contentEditable={true} onSelect={onHandleSelect}></div>
       </div>
     </>
   );

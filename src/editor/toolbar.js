@@ -1,6 +1,9 @@
 import React from 'react';
+import useSynonyms from '../useSynonyms';
 
 export default function Toolbar(props) {
+  const synonyms = useSynonyms(props.word);
+
   return (
     <div id='control-panel'>
       <input
@@ -12,13 +15,24 @@ export default function Toolbar(props) {
         return (
           <button
             key={key}
-            className={document.queryCommandState(tool.name) ? ' active' : ''}
-            onClick={e => props.clickTool(key)}
+            className={document.queryCommandState(key) ? ' active' : ''}
+            onClick={() => props.clickTool(key)}
           >
             {tool.icon}
           </button>
         );
       })}
+      <select
+        className='synonyms'
+        onChange={e => props.changeWord(e.target.value)}
+      >
+        <option key='default'>Select synonym</option>
+        {synonyms.map((item, key) => (
+          <option key={key} value={item.word}>
+            {item.word}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
