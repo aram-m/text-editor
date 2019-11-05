@@ -14,7 +14,7 @@ function getSelectedText() {
   return text;
 }
 
-const tools = {
+let tools = {
   bold: {
     icon: 'B'
   },
@@ -37,6 +37,7 @@ const tools = {
 
 function Editor() {
   const [selected, setSelected] = useState(null);
+  const [command, setCommandChanged] = useState(null);
 
   const onHandleSelect = () => {
     setSelected(getSelectedText());
@@ -53,9 +54,9 @@ function Editor() {
 
   const clickTool = toolName => {
     document.execCommand(toolName);
-    setSelected(getSelectedText());
+    const commandChanged = !command;
+    setCommandChanged(commandChanged);
   };
-
   return (
     <>
       <Toolbar
@@ -63,6 +64,7 @@ function Editor() {
         clickColor={clickColor}
         changeWord={changeWord}
         tools={tools}
+        stateChanged={command}
         word={selected}
       />
       <div id='editor'>

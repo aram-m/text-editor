@@ -3,7 +3,6 @@ import useSynonyms from '../useSynonyms';
 
 export default function Toolbar(props) {
   const synonyms = useSynonyms(props.word);
-
   return (
     <div id='control-panel'>
       <input
@@ -11,6 +10,7 @@ export default function Toolbar(props) {
         type='color'
         onChange={e => props.clickColor(e.target.value)}
       />
+
       {Object.entries(props.tools).map(([key, tool]) => {
         return (
           <button
